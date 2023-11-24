@@ -4,7 +4,7 @@ services:
   pgdb:
     environment:
     - PGDATA=/var/lib/postgresql/data/locketdb
-    - POSTGRES_PASSWORD=asdf1234
+    - POSTGRES_PASSWORD=123456
     image: 'postgres:latest'
     ports:
     - 5432:5432
