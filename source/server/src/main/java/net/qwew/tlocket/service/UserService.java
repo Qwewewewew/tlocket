@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.entity.User;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
 import net.qwew.tlocket.exception.UsernameCollisionException;
@@ -38,7 +39,10 @@ public class UserService {
         return oldUser;
     }
 
-    public Long getIdByUsername(String username) {
-        return repository.findByUsername(username).getId();
+    public Long getIdByUsername(String username) throws NotFoundException{
+        Long foundId = repository.findByUsername(username).getId();
+        if(foundId == null)
+            throw new NotFoundException("No such user - entry not present"); 
+        return foundId;
     }
 }

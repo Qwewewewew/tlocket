@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.qwew.tlocket.entity.User;
+import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
 import net.qwew.tlocket.exception.UsernameCollisionException;
 import net.qwew.tlocket.service.UserService;
@@ -33,7 +34,13 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<String> getUserIdByUsername(@PathVariable("username") String username) {
         System.out.println(username);
-        Long id = userService.getIdByUsername(username);
+        Long id;
+        try {
+            id = userService.getIdByUsername(username);
+        }
+        catch(NotFoundException notFound) {
+            return ResponseEntity.badRequest().body(notFound.toString());
+        }
         return ResponseEntity.ok().body(Long.toString(id));
     }
 
