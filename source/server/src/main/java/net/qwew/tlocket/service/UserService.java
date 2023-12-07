@@ -37,4 +37,8 @@ public class UserService {
         repository.save(oldUser);
         return oldUser;
     }
+
+    public Long getIdByUsername(String username) {
+        return repository.findByUsername(username).getId();
+    }
 }

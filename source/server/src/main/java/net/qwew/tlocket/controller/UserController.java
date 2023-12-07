@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,13 @@ public class UserController {
     public ResponseEntity<String> getUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok().body(users.toString());
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<String> getUserIdByUsername(@PathVariable("username") String username) {
+        System.out.println(username);
+        Long id = userService.getIdByUsername(username);
+        return ResponseEntity.ok().body(Long.toString(id));
     }
 
     @PostMapping
