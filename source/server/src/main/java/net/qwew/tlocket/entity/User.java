@@ -1,8 +1,6 @@
 package net.qwew.tlocket.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -13,17 +11,13 @@ import lombok.Data;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String username;
 
     @Override
     public String toString() {
         return "{\n" +
-                "\t\"id\": " + id +
-                ", \n\t\"username\": \"" + this.username + "\"\n" +
-                '}';
+                "\t\"username\": \"" + this.username + "\"\n" +
+                "}";
     }
 
 }

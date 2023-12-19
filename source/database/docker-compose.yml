@@ -5,7 +5,7 @@ services:
     environment:
     - PGDATA=/var/lib/postgresql/data/locketdb
     - POSTGRES_PASSWORD=123456
-    image: 'postgres:latest'
+    image: 'postgres:16.1-bullseye'
     ports:
     - 5432:5432
     restart: always

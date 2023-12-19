@@ -3,14 +3,13 @@ CREATE DATABASE locketdb;
 \c locketdb;
 
 CREATE TABLE IF NOT EXISTS users (
-	id BIGSERIAL NOT NULL PRIMARY KEY,
-	username TEXT
+	username TEXT PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS msg (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	sender_id BIGSERIAL,
-	receiver_id BIGSERIAL,
-	FOREIGN KEY (sender_id) REFERENCES users (id),
-	FOREIGN KEY (receiver_id) REFERENCES users (id)
+	sender_uname TEXT,
+	receiver_uname TEXT,
+	FOREIGN KEY (sender_uname) REFERENCES users (username),
+	FOREIGN KEY (receiver_uname) REFERENCES users (username)
 );

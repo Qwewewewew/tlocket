@@ -5,17 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.qwew.tlocket.entity.User;
-import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
-import net.qwew.tlocket.exception.UsernameCollisionException;
 import net.qwew.tlocket.service.UserService;
 
 @RestController
@@ -31,19 +27,6 @@ public class UserController {
         return ResponseEntity.ok().body(users.toString());
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<String> getUserIdByUsername(@PathVariable("username") String username) {
-        System.out.println(username);
-        Long id;
-        try {
-            id = userService.getIdByUsername(username);
-        }
-        catch(NotFoundException notFound) {
-            return ResponseEntity.badRequest().body(notFound.toString());
-        }
-        return ResponseEntity.ok().body(Long.toString(id));
-    }
-
     @PostMapping
     public ResponseEntity<String> register(@RequestBody User user) {
         try {
@@ -52,20 +35,6 @@ public class UserController {
         
         catch(UsernameAlreadyExistsException usernameExists) {
             return ResponseEntity.badRequest().body(usernameExists.getMessage());
-        }
-        catch(Exception e) {
-            return ResponseEntity.badRequest().body("Something unexpected is happening:\n"+e.toString());
-        }
-    }
-
-    @PatchMapping
-    public ResponseEntity<String> usernameChange(@RequestBody User user) {
-        try {
-            return ResponseEntity.ok().body(userService.changeUsername(user).toString());
-        }
-
-        catch(UsernameCollisionException userCollision) {
-            return ResponseEntity.badRequest().body(userCollision.getMessage());
         }
         catch(Exception e) {
             return ResponseEntity.badRequest().body("Something unexpected is happening:\n"+e.toString());
