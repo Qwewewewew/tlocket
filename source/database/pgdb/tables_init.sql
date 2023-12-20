@@ -1,6 +1,6 @@
-CREATE DATABASE locketdb;
+CREATE DATABASE tlocket;
 
-\c locketdb;
+\c tlocket;
 
 CREATE TABLE IF NOT EXISTS users (
 	username TEXT PRIMARY KEY

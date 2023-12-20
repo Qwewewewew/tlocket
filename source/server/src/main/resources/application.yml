@@ -4,7 +4,7 @@ spring:
 
     driver-class-name: org.postgresql.Driver
 
-    url: jdbc:postgresql://localhost:5432/locketdb
+    url: jdbc:postgresql://localhost:5432/tlocket
 
     username: postgres
 
