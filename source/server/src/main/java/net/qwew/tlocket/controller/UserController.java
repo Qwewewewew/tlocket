@@ -23,14 +23,19 @@ public class UserController {
     
     @GetMapping
     public ResponseEntity<String> getUsers() {
-        List<User> users = userService.getAllUsers();
-        return ResponseEntity.ok().body(users.toString());
+        try {
+            List<User> users = userService.getAllUsers();
+            return ResponseEntity.ok().body(users.toString());
+        }
+        catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.toString());
+        }
     }
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody User user) {
         try {
-            return ResponseEntity.ok().body(userService.addUser(user).toString());
+            return ResponseEntity.created(null).body(userService.addUser(user).toString());
         }
         
         catch(UsernameAlreadyExistsException usernameExists) {
