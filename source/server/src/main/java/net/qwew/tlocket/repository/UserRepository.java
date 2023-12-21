@@ -7,5 +7,4 @@ import net.qwew.tlocket.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
 }

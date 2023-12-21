@@ -34,7 +34,7 @@ public class UserController {
         }
         
         catch(UsernameAlreadyExistsException usernameExists) {
-            return ResponseEntity.badRequest().body(usernameExists.getMessage());
+            return ResponseEntity.badRequest().body(usernameExists.toString());
         }
         catch(Exception e) {
             return ResponseEntity.badRequest().body("Something unexpected is happening:\n"+e.toString());

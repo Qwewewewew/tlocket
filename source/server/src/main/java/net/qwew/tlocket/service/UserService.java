@@ -15,8 +15,8 @@ public class UserService {
     UserRepository repository;
 
     public User addUser(User user) throws UsernameAlreadyExistsException {
-        if(repository.findById(user.getUsername()) != null)
-            throw new UsernameAlreadyExistsException("User Already Exists");
+        if(repository.existsById(user.getUsername()))
+            throw new UsernameAlreadyExistsException("Username Already Taken");
         
         return repository.save(user);
     }
