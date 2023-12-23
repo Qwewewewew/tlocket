@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import net.qwew.tlocket.entity.User;
+import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
 import net.qwew.tlocket.repository.UserRepository;
 
@@ -23,5 +24,12 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return repository.findAll();
+    }
+
+    public User getUserByUsername(String username) throws NotFoundException {
+        if(!repository.existsById(username))
+            throw new NotFoundException("No User Found");
+        
+        return repository.findById(username).get();
     }
 }

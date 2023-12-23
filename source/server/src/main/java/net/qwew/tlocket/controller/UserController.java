@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.qwew.tlocket.entity.User;
+import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
 import net.qwew.tlocket.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/users")
@@ -45,4 +48,19 @@ public class UserController {
             return ResponseEntity.badRequest().body("Something unexpected is happening:\n"+e.toString());
         }
     }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<String> getMethodName(@RequestParam String username) {
+        try {
+            return ResponseEntity.ok().body(userService.getUserByUsername(username).toString());
+        }
+        
+        catch(NotFoundException notFound) {
+            return ResponseEntity.badRequest().body(notFound.toString());
+        }
+        catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.toString());
+        }
+    }
+    
 }
