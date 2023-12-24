@@ -28,7 +28,7 @@ public class UserService {
 
     public User getUserByUsername(String username) throws NotFoundException {
         if(!repository.existsById(username))
-            throw new NotFoundException("No User Found");
+            throw new NotFoundException("No Such User Found");
         
         return repository.findById(username).get();
     }

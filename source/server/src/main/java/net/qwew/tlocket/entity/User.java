@@ -1,5 +1,7 @@
 package net.qwew.tlocket.entity;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -15,9 +17,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "{\n" +
-                "\t\"username\": \"" + this.username + "\"\n" +
-                "}";
+        try {
+            ObjectMapper objMapper = new ObjectMapper();
+            return objMapper.writeValueAsString(this);
+        }
+        catch(Exception e) {
+            return e.toString();
+        }
     }
-
 }

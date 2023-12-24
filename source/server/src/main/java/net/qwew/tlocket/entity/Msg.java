@@ -1,5 +1,7 @@
 package net.qwew.tlocket.entity;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,4 +28,15 @@ public class Msg {
     @ManyToOne
     @JoinColumn(name = "receiver_uname")
     private User receiver;
+
+    @Override
+    public String toString() {
+        try {
+            ObjectMapper objMapper = new ObjectMapper();
+            return objMapper.writeValueAsString(this);
+        }
+        catch(Exception e) {
+            return e.toString();
+        }
+    }
 }

@@ -35,9 +35,9 @@ public class MsgController {
     }
     
     @GetMapping
-    public ResponseEntity<String> fetchMsg(@RequestBody User user) {
-        Msg msg = msgService.fetchRecentByReceiver(user);
-        return ResponseEntity.ok().body(msg.toString());
+    public ResponseEntity<String> fetchMsg(@RequestBody User receiver) {
+        Msg msg = msgService.fetchRecentByReceiver(receiver);
+        return ResponseEntity.ok().body(msg.getContent());
     }
     
 }
