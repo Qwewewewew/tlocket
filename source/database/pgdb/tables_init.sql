@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS msg (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
+	content TEXT,
 	sender_uname TEXT,
 	receiver_uname TEXT,
 	FOREIGN KEY (sender_uname) REFERENCES users (username),

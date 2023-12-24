@@ -15,7 +15,6 @@ import net.qwew.tlocket.entity.User;
 import net.qwew.tlocket.exception.NotFoundException;
 import net.qwew.tlocket.exception.UsernameAlreadyExistsException;
 import net.qwew.tlocket.service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
